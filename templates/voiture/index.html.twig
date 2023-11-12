@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes nos voitures{% endblock %}
+
+
+{% block body %}{% set pageTitle = 'Toutes les voitures' %}
+{% include 'pagination/_nav.html.twig' %}
+
+<div class="container js-filter">
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'voiture/_filter.html.twig' with {form:form, min:min, max:max} only %}
+        </div>
+        <div class="col-md-9">
+            <div class="d-flex justify-content-end m-2 js-filter-sorting">
+                {% include 'voiture/_sorting.html.twig' %}
+            </div>
+            <div class="grid js-filter-content">
+                {% include 'voiture/_voitures.html.twig' %}
+            </div>  
+            <diV class="mt-4 js-filter-pagination">
+                {% include 'voiture/_pagination.html.twig' %}
+            </diV>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

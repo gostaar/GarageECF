@@ -1,0 +1,55 @@
+<div id="container-carousel">
+    <div id="carousel" class="carousel">
+        {% if voiture.Images|length > 0 %}
+        {% set i = 1 %}
+        {% set totalSlides = voiture.Images|length %}
+        {% for image in voiture.Images %}
+            <div id="slide{{ i }}" class="slide">
+                <div class="visu">
+                    <img style="height: 100%; width: 100%; object-fit: fill;" src="{{ asset('/assets/images/' ~ image.name) }}" alt="slide">
+                </div>
+                <div class="title">{{ voiture.name }}</div>
+                
+                <div class="navigation">
+                    {% for j in 1..totalSlides %}
+                        <span style="margin-right: 10px;" class="slide-number" data-slide="{{ j }}">{{ j }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% set i = i + 1 %}
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="carousel-buttons">
+        <button id="prevButton">◀︎</button>
+        <button id="nextButton">▶︎</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var carouselElem = document.getElementById('carousel');
+    var myCarousel = new Carousel($(carouselElem));
+    myCarousel.init();
+
+    // Attacher des gestionnaires d'événements aux boutons
+    document.getElementById('prevButton').addEventListener('click', function() {
+        myCarousel.prev();
+    });
+
+    document.getElementById('nextButton').addEventListener('click', function() {
+        myCarousel.next();
+    });
+
+    // Attacher un gestionnaire d'événements pour la navigation en cliquant sur les numéros de slides
+    var slideNumberElements = document.querySelectorAll('.slide-number');
+    if (slideNumberElements) {
+        slideNumberElements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                var slideNumber = parseInt(element.dataset.slide);
+                myCarousel.showSlide(slideNumber);
+            });
+        });
+    }
+});
+</script>

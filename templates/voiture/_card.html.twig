@@ -1,0 +1,25 @@
+<div class="card" id="voiture-{{ voiture.id }}">
+    {% for car in voiture.Images %}
+        {% if loop.first %}
+            <img src="{{ asset('/assets/images/' ~ car.name) }}" alt="" class="card-img-top">
+        {% endif %}
+    {% endfor %}
+
+    <div class="card-body">
+        <h5 class="card-title"><a href="{{ path('details', {'id': voiture.id}) }}">{{ voiture.name }}</a></h5>
+        <div class="card-title text-primary" style="font-weight: bold; font-size: 1.5rem;">
+            {{ voiture.price | number_format(0, ',', ' ') }} €
+            {% if voiture.EstVendu %}
+                <div class="text text-warning">
+                    Cette voiture n'est plus disponible !
+                </div>
+            {% endif %}
+        </div>
+        <p class="text-muted">{{ voiture.description }}</p>
+        <div>
+            {% for c in voiture.categories %}
+                <em class="text-muted text-primary text-italic">{{ c.name }}</em>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block body %}{% set pageTitle = 'Panneau de contrôle' %}
+{% include 'pagination/_nav.html.twig' %}
+
+    <div>{{ link|raw }}</div>
+    <div>{{ linkV|raw }}</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Voiture{% endblock %}
+
+
+{% block javascripts %}{% set pageTitle = 'Détail de la voiture' %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/carousel.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+{% include 'pagination/_nav.html.twig' %}
+
+<div class="contener">
+    {% include 'voiture{id}/_carousel.html.twig' %}
+    <div class="contenu">
+       {% include 'voiture{id}/_details.html.twig' %}
+    </div>
+</div>
+               
+{% endblock %}
+
+

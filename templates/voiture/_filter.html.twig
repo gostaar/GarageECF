@@ -1,0 +1,34 @@
+{{ form_start(form, {attr: {class: 'filter js-filter-form'}}) }}
+
+<div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
+<span class="sr-only">Loading...</span>
+</div>
+
+{{ form_row(form.q, {'attr': {'style': 'width: 100%;'}}) }}
+
+<h4>Catégories</h4>
+   
+{% for category in form.categories %}   
+    <div style="display: flex;">
+        {{ form_widget(category, {'attr': {'style': 'margin-right: 10px;'}}) }}
+        {{ form_label(category) }}
+    </div>
+{% endfor %}
+
+<h4>Prix</h4>
+<div class="row">
+<div class="col-md-6">
+    {{ form_row(form.min, {'attr': {'style': 'width: 100%;'}}) }}
+</div>
+<div class="col-md-6">
+    {{ form_row(form.max, {'attr': {'style': 'width: 100%;'}}) }}
+</div>
+</div>
+
+    <div id="price-slider" data-min="{{ min }}" data-max="{{ max }}" style="margin-bottom: 3rem; margin-top: 1rem;"></div>
+
+<h4>Est Vendu</h4>
+{{ form_row(form.estVendu) }}
+<button type="submit" class="btn btn-primary w-100">Filtrer</button>
+
+{{ form_end(form) }}

@@ -1,16 +1,92 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+		<meta charset="UTF-8">
+		<title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block javascripts %}
-        {% endblock %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css"> {% block stylesheets %}{% endblock %}
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+            {{ encore_entry_link_tags('app') }}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="/assets/css/nouislider.css" rel="stylesheet">
+        <link href="/assets/css/styles.css" rel="stylesheet">
+        {% block javascripts %}{% endblock %}
+        {{ encore_entry_script_tags('app') | replace({'src=': 'defer src='}) | raw }}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header >
+            <div class="container d-flex flex-row flex-wrap ">
+                <a href="{{path('voiture')}}"><img class="p-2 m-auto" src="/assets/images/logo.jpg" style="min-width:100px; max-width: 200px;"></a>
+                <ul class="p-2 nav m-auto ">
+                    <li class="nav-item"><a href="{{path('voiture')}}" class="nav-link link-body-emphasis px-2" id="acceuil">Accueil</a></li>
+                    {# <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" id="annonce">Annonces</a></li> #}
+                    {#<li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" id="service">Services</a></li>#}
+                    {#<li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" id="contact">Contact</a></li>#}
+                    {#<li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" id="hiraire">Horaire</a></li>#}
+                </ul>
+                <ul class="p-2 nav m-auto">
+                    {% if app.user %}
+                        <li class="nav-item nav-link">Bonjour {{ app.user.userIdentifier }}</li>
+                        <li class="nav-item"><a id="deconnexion" href="{{ path('app_logout') }}" class="nav-link link-body-emphasis px-2">Déconnexion</a></li>
+                    {% else %} 
+                        <li class="nav-item"><a id="connexion" href="{{ path('app_login') }}" class="nav-link link-body-emphasis px-2 ">Connexion</a></li>
+                        <li class="nav-item"><a id="inscription" href="{{ path('app_register') }}" class="nav-link link-body-emphasis px-2">Inscription</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
+
+        <main role="main" class="container mt-5 site-content">
+            
+  
+                {% block body %}{% endblock %}
+            </div>
+            
+        </main>
+
+        <footer >
+            <section class="container-footer d-flex " >
+              <article >
+                <div class="nav-item text-body-secondary"><h4 class="h-1">Garage</h4></div>
+                <div class="nav-item text-body-secondary"><h4 class="h-2">V. Parrot</h4></div>
+              </article>
+              <article>
+                <div class="nav-item mb-2"><h5>Navigation</h5></div>
+                <div class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Acceuil</a></div>
+                {#<div class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Annonces</a></div>#}
+                {#<div class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Service</a></div>#}
+                {#<div class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact</a></div>#}
+              </article>
+              <article>
+                {% if app.user %}
+                <div class="nav-item mb-2">
+                    <h5>Administration</h5>
+                </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="nav-item mb-2">
+                            <a href="{{ path('admin') }}" class="nav-link p-0 text-body-secondary">Page d'administration</a>
+                        </div>
+                    {% elseif is_granted('ROLE_USER') %}
+                        <div class="nav-item mb-2">
+                            <a href="{{ path('dashboard') }}" class="nav-link p-0 text-body-secondary">Page d'administration</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+              </article>
+              <article>
+                <div class="nav-item mb-2" ><h5>Suivez-nous</h5></div>
+                <a href="#">
+                    <img src="/assets/images/twitter.jpg" alt="Twitter" width="50">
+                    <img src="/assets/images/facebook.jpg" alt="Facebook" width="40">
+                    <img src="/assets/images/instagram.jpg" alt="Instagram" width="40">
+                </a>
+              </article>
+            </section>
+          </footer>
+        
+        <script defer src="/assets/js/nouislider.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>

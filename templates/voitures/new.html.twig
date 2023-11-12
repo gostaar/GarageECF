@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Voiture{% endblock %}
+
+{% block body %}{% set pageTitle = 'Nouvelle Voiture' %}
+{% include 'pagination/_nav.html.twig' %}
+
+    <h1>Create new Voiture</h1>
+
+    {{ include('voitures/_form.html.twig') }}
+
+    <a href="{{ path('app_voitures_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+<nav class="navbar navbar-dark bg-primary text-light ">
+    <a href="" class="navbar-brand mb-0 h1 ml-3">{{ pageTitle }}</a>
+</nav>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navbarBrand = document.querySelector('.navbar-brand');
+        navbarBrand.href = window.location.href;
+    });
+</script>
+<div style="margin-top: 3rem;">

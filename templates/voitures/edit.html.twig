@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Voiture{% endblock %}
+
+{% block body %}{% set pageTitle = 'Modifier la voiture' %}
+{% include 'pagination/_nav.html.twig' %}
+
+    <h1>Edit Voiture</h1>
+
+    {{ include('voitures/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_voitures_index') }}">back to list</a>
+
+    {{ include('voitures/_delete_form.html.twig') }}
+{% endblock %}
