@@ -54,7 +54,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    //.enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -68,15 +68,6 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-
-    .configureDevServerOptions(options => {
-        options.proxy = {
-            '^/index.php': {
-                target: 'http://localhost:8080',
-                changeOrigin: true,
-            },
-        };
-    })
 ;
 
 module.exports = Encore.getWebpackConfig();

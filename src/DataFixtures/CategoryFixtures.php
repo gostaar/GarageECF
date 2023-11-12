@@ -12,15 +12,17 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
+        $categoryNames = ['citroen', 'mercedes', 'peugeot', 'ferrari', 'renault'];
+
         // Création de 5 catégories
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $category = new Category();
-            $category->setName("Category $i");
+            $category->setName($categoryNames[$i]); // Corrected variable name
+            
             $manager->persist($category);
         
             $this->addReference("category_$i", $category);
         }
-        
 
         $manager->flush();
     }

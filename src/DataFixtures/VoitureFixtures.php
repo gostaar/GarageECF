@@ -24,7 +24,7 @@ class VoitureFixtures extends Fixture
             $voiture->setPrice($faker->numberBetween(1000, 10000));
             $voiture->setModele($faker->text);
             $voiture->setEstVendu($faker->boolean(10));
-            $voiture->addCategory($this->getReference("category_" . $faker->numberBetween(1, 5)));
+            $voiture->addCategory($this->getReference("category_" . $faker->numberBetween(0, 4)));
 
             $imagesNames = ['image.png', 'car.png', 'image.jpg'];
             foreach ($imagesNames as $imageName) {
